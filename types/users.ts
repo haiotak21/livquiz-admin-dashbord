@@ -2,9 +2,9 @@ export type UserRole = 'student' | 'teacher';
 
 export type UserMetric = {
   id: string;
-  label: string;
-  value: string | number;
+  value: number | string;
   change: string;
+  title: string;
 };
 
 export type UserStatsResponse = {

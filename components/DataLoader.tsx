@@ -232,8 +232,8 @@ export const DataLoader = ({
     return <ErrorDisplay error={error} onRetry={onRetry} />;
   }
 
-  // Render loading state with skeleton
-  if (isLoading) {
+  // Render skeleton loader for both initial load and refetch
+  if (isLoading || isRefetching) {
     const SkeletonComponent = {
       dashboard: DashboardSkeleton,
       users: UsersSkeleton,
@@ -257,10 +257,9 @@ export const DataLoader = ({
     );
   }
 
-  // Render children with reload spinner if refetching
+  // Render children
   return (
     <div className="relative">
-      {isRefetching && <ReloadSpinner />}
       {children}
       <Toaster 
         position="bottom-right"

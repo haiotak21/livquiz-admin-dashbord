@@ -13,7 +13,7 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     // Only log errors in development and if it's not a timeout
-    if (process.env.NODE_ENV === 'development' && !error.code === 'ECONNABORTED') {
+    if (process.env.NODE_ENV === 'development' && error.code !== 'ECONNABORTED') {
       console.error('API Error:', error.response?.data || error.message);
     }
     return Promise.reject(error);

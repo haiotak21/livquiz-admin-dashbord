@@ -87,13 +87,13 @@ export default function ResourcesManagement() {
       </div>
 
       <Card className="bg-[#ffff] border-[#1B254B]">
-        <div className="flex justify-between items-center mb-6">
-          <Title className="text-gray-900 mb-4">Resource List</Title>
-          <div className="relative">
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mb-6">
+          <Title className="text-gray-900">Resource List</Title>
+          <div className="relative w-full sm:w-auto">
             <input
               type="text"
               placeholder="Search resources..."
-              className="bg-gray-50 border border-gray-200 text-gray-900 px-4 py-2 rounded-lg pl-10 focus:outline-none focus:ring-2 focus:ring-[#7928CA] focus:border-transparent"
+              className="w-full sm:w-80 bg-gray-50 border border-gray-200 text-gray-900 px-4 py-2 rounded-lg pl-10 focus:outline-none focus:ring-2 focus:ring-[#7928CA] focus:border-transparent"
             />
             <span className="absolute left-3 top-2.5 text-gray-400">🔍</span>
           </div>

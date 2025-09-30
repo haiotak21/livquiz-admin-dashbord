@@ -232,24 +232,24 @@ export default function UserManagement() {
         </table>
       </div>
 
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mt-4">
         <span className="text-gray-600">
           Showing {(page - 1) * 10 + 1} -{" "}
           {Math.min(page * 10, usersData?.total || 0)} of{" "}
           {usersData?.total || 0}
         </span>
-        <div className="space-x-2">
+        <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-2">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-3 py-1 border rounded-md disabled:opacity-50"
+            className="px-3 py-2 sm:py-1 border rounded-md disabled:opacity-50 w-full sm:w-auto"
           >
             Previous
           </button>
           <button
             onClick={() => setPage((p) => p + 1)}
             disabled={page * 10 >= (usersData?.total || 0)}
-            className="px-3 py-1 border rounded-md disabled:opacity-50"
+            className="px-3 py-2 sm:py-1 border rounded-md disabled:opacity-50 w-full sm:w-auto"
           >
             Next
           </button>

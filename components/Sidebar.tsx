@@ -50,7 +50,11 @@ const menuItems = [
   }
 ];
 
-export default function Sidebar() {
+type SidebarProps = {
+  onNavigate?: () => void;
+};
+
+export default function Sidebar({ onNavigate }: SidebarProps) {
   return (
     <div className="w-64 bg-white border-r border-gray-200 overflow-y-auto flex flex-col h-screen">
       <div className="h-16 flex items-center px-6 mb-8">
@@ -61,6 +65,7 @@ export default function Sidebar() {
           <Link
             key={item.href}
             href={item.href}
+            onClick={onNavigate}
             className="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors group"
           >
             <item.icon className={`w-5 h-5 mr-3 ${item.color} group-hover:text-current transition-colors`} />

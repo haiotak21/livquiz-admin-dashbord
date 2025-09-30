@@ -1,12 +1,24 @@
 "use client";
 
-import { Bell, Search, User } from 'lucide-react';
+import { Bell, Menu, Search, User } from 'lucide-react';
 
-export default function Header() {
+type HeaderProps = {
+  onMenuClick?: () => void;
+};
+
+export default function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header className="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-6">
-      <div className="flex items-center flex-1">
-        <div className="relative w-96">
+    <header className="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-4 md:px-6">
+      <div className="flex items-center flex-1 gap-3">
+        <button
+          type="button"
+          aria-label="Open menu"
+          onClick={onMenuClick}
+          className="md:hidden p-2 rounded-lg hover:bg-gray-50 text-gray-600"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
+        <div className="relative w-full md:w-96">
           <input
             type="text"
             placeholder="Search..."
@@ -15,7 +27,7 @@ export default function Header() {
           <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-500" />
         </div>
       </div>
-      
+
       <div className="flex items-center space-x-4">
         <button className="p-2 hover:bg-gray-50 rounded-lg">
           <Bell className="h-5 w-5 text-gray-600" />

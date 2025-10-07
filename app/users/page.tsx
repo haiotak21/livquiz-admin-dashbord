@@ -60,19 +60,19 @@ export default function UserManagement() {
     setLoadingActive(true);
     setActiveError(null);
     try {
-      const [monthlyRes, dailyRes] = await Promise.all([
-        fetch("/api/users/monthly-active"),
-        fetch("/api/users/daily-active"),
-      ]);
-      if (!monthlyRes.ok)
-        throw new Error("Failed to fetch monthly active users");
-      if (!dailyRes.ok) throw new Error("Failed to fetch daily active users");
-      const monthlyJson = await monthlyRes.json();
-      const dailyJson = await dailyRes.json();
-      setMonthlyActive(monthlyJson.data ?? { count: 0, users: [] });
-      setDailyActive(dailyJson.data ?? { count: 0, users: [] });
-    } catch (err: any) {
-      setActiveError(err.message || "Error");
+      const res = await fetch(
+        "https://backend.livquiz.com/prod/api/dashboard/user/monthly-active-users"
+      );
+      if (!res.ok) throw new Error("Failed to fetch monthly active users");
+      const data = await res.json();
+      setMonthlyActive(data.data);
+      const daily = await fetch(
+        "https://backend.livquiz.com/prod/api/dashboard/user/daily-active-users"
+      );
+      const dailyData = await daily.json();
+      setDailyActive(dailyData.data);
+    } catch (error) {
+      console.error(error);
     } finally {
       setLoadingActive(false);
     }
@@ -232,24 +232,24 @@ export default function UserManagement() {
         </table>
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mt-4">
+      <div className="flex justify-between items-center mt-4">
         <span className="text-gray-600">
           Showing {(page - 1) * 10 + 1} -{" "}
           {Math.min(page * 10, usersData?.total || 0)} of{" "}
           {usersData?.total || 0}
         </span>
-        <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-2">
+        <div className="space-x-2">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-3 py-2 sm:py-1 border rounded-md disabled:opacity-50 w-full sm:w-auto"
+            className="px-3 py-1 border rounded-md disabled:opacity-50"
           >
             Previous
           </button>
           <button
             onClick={() => setPage((p) => p + 1)}
             disabled={page * 10 >= (usersData?.total || 0)}
-            className="px-3 py-2 sm:py-1 border rounded-md disabled:opacity-50 w-full sm:w-auto"
+            className="px-3 py-1 border rounded-md disabled:opacity-50"
           >
             Next
           </button>
